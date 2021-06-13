@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 @Data
 @FieldNameConstants
 public class BookDTO {
+    private int id;
     private String title;
     private String category;
     private BigDecimal price;
