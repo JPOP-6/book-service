@@ -1,5 +1,7 @@
 package com.book.service.system.service;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.book.service.system.model.Book;
 import com.book.service.system.model.dto.BookDTO;
 import com.book.service.system.model.mapper.BookModelMapper;
@@ -17,6 +19,9 @@ public class BookService {
 
     private final BookModelMapper bookModelMapper;
 
+    @Autowired
+    DynamoDBMapper mapper;
+
     public BookService(@Autowired BookRepository bookRepository,
                        @Autowired BookModelMapper bookModelMapper) {
         this.bookRepository = bookRepository;
@@ -24,7 +29,8 @@ public class BookService {
     }
 
     public List<BookDTO> getAllBooks() {
-        List<Book> books = bookRepository.findAll();
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+        List<Book> books = mapper.scan(Book.class, scanExpression);
         return books.stream().map(bookModelMapper::toDto).collect(Collectors.toList());
     }
 
