@@ -28,7 +28,7 @@ public class BookService {
         return books.stream().map(bookModelMapper::toDto).collect(Collectors.toList());
     }
 
-    public BookDTO getBookById(int id) {
+    public BookDTO getBookById(String id) {
         Book book = bookRepository.getById(id);
         return bookModelMapper.toDto(book);
     }
@@ -39,12 +39,12 @@ public class BookService {
         return bookModelMapper.toDto(book);
     }
 
-    public void deleteBook(int id) {
+    public void deleteBook(String id) {
         Book book = bookRepository.getById(id);
         bookRepository.delete(book);
     }
 
-    public BookDTO updateBook(int id, BookDTO bookDTO) {
+    public BookDTO updateBook(String id, BookDTO bookDTO) {
         if (bookRepository.existsById(id)) {
             Book book = bookRepository.getById(id);
             book = bookModelMapper.updateExceptPrice(book, bookDTO);

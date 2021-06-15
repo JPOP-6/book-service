@@ -36,7 +36,7 @@ public class BookServiceResourceImpl implements BookServiceResource {
     }
 
     @Override
-    public ResponseEntity<BookServiceResult> getBookById(int id) {
+    public ResponseEntity<BookServiceResult> getBookById(String id) {
         ResponseEntity<BookServiceResult> responseEntity;
         BookServiceResult bookServiceResult = new BookServiceResult();
         try {
@@ -68,7 +68,7 @@ public class BookServiceResourceImpl implements BookServiceResource {
     }
 
     @Override
-    public ResponseEntity<BookServiceResult> deleteBook(int id) {
+    public ResponseEntity<BookServiceResult> deleteBook(String id) {
         ResponseEntity<BookServiceResult> responseEntity;
         BookServiceResult bookServiceResult = new BookServiceResult();
         try {
@@ -83,7 +83,7 @@ public class BookServiceResourceImpl implements BookServiceResource {
     }
 
     @Override
-    public ResponseEntity<BookServiceResult> updateBook(int id, BookDTO bookDTO) {
+    public ResponseEntity<BookServiceResult> updateBook(String id, BookDTO bookDTO) {
         ResponseEntity<BookServiceResult> responseEntity;
         BookServiceResult bookServiceResult = new BookServiceResult();
         try {
