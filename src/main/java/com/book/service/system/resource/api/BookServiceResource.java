@@ -17,14 +17,14 @@ public interface BookServiceResource {
     ResponseEntity<BookServiceResult> getAllBooks();
 
     @GetMapping("/{id}")
-    ResponseEntity<BookServiceResult> getBookById(@PathVariable("id") int id);
+    ResponseEntity<BookServiceResult> getBookById(@PathVariable("id") String id);
 
     @PostMapping("/")
     ResponseEntity<BookServiceResult> addBook(@RequestBody BookDTO book);
 
     @DeleteMapping("/{id}")
-    ResponseEntity<BookServiceResult> deleteBook(@PathVariable("id") int id);
+    ResponseEntity<BookServiceResult> deleteBook(@PathVariable("id") String id);
 
     @PutMapping("/{id}")
-    ResponseEntity<BookServiceResult> updateBook(@PathVariable("id") int id, @RequestBody BookDTO bookDTO);
+    ResponseEntity<BookServiceResult> updateBook(@PathVariable("id") String id, @RequestBody BookDTO bookDTO);
 }
