@@ -16,9 +16,9 @@ import java.util.List;
 public class BookServiceResourceImpl implements BookServiceResource {
     private static final String TOPIC = "BookServiceTopic";
     private final BookService bookService;
-    private final KafkaTemplate <String, BookServiceResult> kafkaTemplate;
+    private final KafkaTemplate <String, String> kafkaTemplate;
 
-    public BookServiceResourceImpl(@Autowired BookService bookService, KafkaTemplate<String, BookServiceResult> kafkaTemplate) {
+    public BookServiceResourceImpl(@Autowired BookService bookService, KafkaTemplate<String, String> kafkaTemplate) {
         this.bookService = bookService;
         this.kafkaTemplate = kafkaTemplate;
     }
@@ -31,7 +31,7 @@ public class BookServiceResourceImpl implements BookServiceResource {
             List<BookDTO> books = bookService.getAllBooks();
             bookServiceResult.setSuccess(true);
             bookServiceResult.setBooks(books);
-            kafkaTemplate.send(TOPIC, bookServiceResult);
+            kafkaTemplate.send(TOPIC, bookServiceResult.toString());
             responseEntity = ResponseEntity.ok(bookServiceResult);
         } catch (Exception exception) {
             bookServiceResult.setError(exception.getMessage());

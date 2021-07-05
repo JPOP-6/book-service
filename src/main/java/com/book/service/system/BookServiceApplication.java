@@ -1,5 +1,6 @@
 package com.book.service.system;
 
+import com.book.service.system.config.KafkaProducerConfiguration;
 import com.book.service.system.model.mapper.BookModelMapperImpl;
 import com.book.service.system.service.BookService;
 import org.springframework.boot.SpringApplication;
@@ -10,7 +11,8 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @Import(value = {
 		BookService.class,
-		BookModelMapperImpl.class
+		BookModelMapperImpl.class,
+		KafkaProducerConfiguration.class
 })
 @EnableDiscoveryClient
 public class BookServiceApplication {
