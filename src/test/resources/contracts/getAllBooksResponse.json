@@ -1,0 +1,22 @@
+{
+  "error": null,
+  "books": [
+    {
+      "id": "1",
+      "title": "title1",
+      "category": "category1",
+      "price": 100,
+      "author": "author1",
+      "publisher": "publisher1"
+    },
+    {
+      "id": "2",
+      "title": "title2",
+      "category": "category2",
+      "price": 200,
+      "author": "author2",
+      "publisher": "publisher2"
+    }
+  ],
+  "success": true
+}
