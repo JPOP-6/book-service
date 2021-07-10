@@ -6,6 +6,7 @@ import com.book.service.system.service.BookService;
 import com.book.service.system.utility.BookServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
@@ -13,10 +14,13 @@ import java.util.List;
 
 @RestController
 public class BookServiceResourceImpl implements BookServiceResource {
+    private static final String TOPIC = "BookServiceTopic";
     private final BookService bookService;
+    private final KafkaTemplate <String, String> kafkaTemplate;
 
-    public BookServiceResourceImpl(@Autowired BookService bookService) {
+    public BookServiceResourceImpl(@Autowired BookService bookService, KafkaTemplate<String, String> kafkaTemplate) {
         this.bookService = bookService;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     @Override
@@ -27,6 +31,7 @@ public class BookServiceResourceImpl implements BookServiceResource {
             List<BookDTO> books = bookService.getAllBooks();
             bookServiceResult.setSuccess(true);
             bookServiceResult.setBooks(books);
+            kafkaTemplate.send(TOPIC, bookServiceResult.toString());
             responseEntity = ResponseEntity.ok(bookServiceResult);
         } catch (Exception exception) {
             bookServiceResult.setError(exception.getMessage());
